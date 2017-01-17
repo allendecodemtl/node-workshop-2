@@ -1,0 +1,42 @@
+var request = require('request');
+var prompt = require('prompt');
+var colors = require('colors');
+var emoji = require('node-emoji');
+
+var wordsURL = "http://words.bighugelabs.com/api/2/b94c927ccf7c57e746ede16bb0703ee5/";
+
+
+// 
+// Start the prompt 
+// 
+prompt.start();
+
+// 
+// Get longitute and latitute of geolocation of city
+// 
+prompt.get(['word'], function(err, result) {
+
+    // 
+    // Log the results. 
+    // 
+    console.log('Command-line input received:');
+    console.log('Enter your location: ' + result.word);
+
+    wordsURL = wordsURL + result.word + "/json";
+
+
+    // Get synonyms from api
+    request(wordsURL, function(err, response) {
+        if (err) {
+            console.log("Something bad happened", err);
+        }
+        else {
+            var searchResults = JSON.parse(response.body)
+
+            console.log(searchResults);
+
+        }
+
+       
+    });
+});
