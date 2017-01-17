@@ -13,55 +13,68 @@ var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 // 
 prompt.start();
 
-// 
-// Get longitute and latitute of geolocation of city
-// 
+
+// Get longitute and latitute of city geolocation
 prompt.get(['location'], function(err, result) {
 
-    // 
     // Log the results. 
-    // 
     console.log('Command-line input received:');
     console.log('Enter your location: ' + result.location);
 
+    //
+    // Get geolocation of city
+    //
     googleURL = googleURL + result.location;
 
-
-    // Get geolocation of city
     request(googleURL, function(err, response) {
+
+        // Catch error from api call
         if (err) {
-            console.log("Something bad happened", err);
+            console.log("Error calling googleURL", err);
         }
         else {
-            var searchResults = JSON.parse(response.body)
-
-            var lat1 = Math.round(searchResults.results[0].geometry.location.lat * 100) / 100;
-            var lon1 = Math.round(searchResults.results[0].geometry.location.lng * 100) / 100;
-
-            console.log(result.location + " lat: " + lat1);
-            console.log(result.location + " lon: " + lon1);
+            try {
+                var searchResults = JSON.parse(response.body)
+                var lat1 = Math.round(searchResults.results[0].geometry.location.lat * 100) / 100;
+                var lon1 = Math.round(searchResults.results[0].geometry.location.lng * 100) / 100;
+            }
+            catch (error) {
+                console.log(error);
+            }
 
         }
 
+        
+        //
+        // Get weather data from darkSky 
+        //
+        
         darkSkyURL = darkSkyURL + lat1 + "," + lon1;
-        console.log(darkSkyURL);
-
-        // Get geolocation of ISS
+        
         request(darkSkyURL, function(err, response) {
+
+            // Catch error from api call
             if (err) {
-                console.log("Something bad happened", err);
+                console.log("Error calling darkSkyURL", err);
             }
             else {
-                var weatherResults = JSON.parse(response.body)
-                //console.log(weatherResults.daily);
+                try {
+                    var weatherResults = JSON.parse(response.body)
 
-                var fiveDays = weatherResults.daily.data.slice(0,5);
-                //console.log(fiveDays);
-                
-                fiveDays.forEach(function(item,index){
-                    console.log(item.summary + " | " + item.icon + " | " + emoji.emojify(':snow_cloud:'));
+                    // Slice next five days
+                    var fiveDays = weatherResults.daily.data.slice(0, 5);
                     
-                })
+                    //****************************
+                    // Print results to console
+                    //****************************
+                    fiveDays.forEach(function(item, index) {
+                        console.log(emoji.emojify(':flag-ca:') + " | " + emoji.emojify(':snow_cloud:') + " | " + item.icon + " | " + item.summary + " | ");
+
+                    })
+                }
+                catch (error) {
+                    console.log(error);
+                }
             }
         });
     });

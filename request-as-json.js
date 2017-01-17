@@ -3,9 +3,9 @@ var request = require('request');
 var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=montreal';
 
 function requestJson(url, callbackFunction) {
-    
+
     request(url, function(error, response) {
-        
+
         if (error) {
             callbackFunction(error);
         }
@@ -23,7 +23,7 @@ function requestJson(url, callbackFunction) {
 }
 
 function callbackFunction(error, objectOfUrl) {
-    console.log(error); 
+    console.log(error);
     console.log(objectOfUrl);
 }
 

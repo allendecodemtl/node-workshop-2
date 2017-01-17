@@ -20,23 +20,24 @@ prompt.get(['word'], function(err, result) {
     // Log the results. 
     // 
     console.log('Command-line input received:');
-    console.log('Enter your location: ' + result.word);
+    console.log('Enter word: ' + result.word);
 
     wordsURL = wordsURL + result.word + "/json";
 
-
     // Get synonyms from api
     request(wordsURL, function(err, response) {
+        // catching error from API call
         if (err) {
-            console.log("Something bad happened", err);
+            console.log("Error calling dictionary API", err);
         }
-        else {
-            var searchResults = JSON.parse(response.body)
-
-            console.log(searchResults);
-
+        else { // API call successful 
+            try {
+                var searchResults = JSON.parse(response.body)
+                console.log(searchResults);
+            }
+            catch (error) {
+                console.log(error);
+            }
         }
-
-       
     });
 });
