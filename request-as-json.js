@@ -12,7 +12,8 @@ function requestJson(url, callbackFunction) {
         else {
             try {
                 var parsed = JSON.parse(response.body);
-                //next line will only be executed if there is no error in the previous line. If error, it goes to catch
+                // next line will only be executed if there is no error in the previous line. 
+                // If error, it goes to catch
                 callbackFunction(null, parsed);
             }
             catch (err) {
@@ -28,3 +29,4 @@ function callbackFunction(error, objectOfUrl) {
 }
 
 requestJson(url, callbackFunction);
+

@@ -3,6 +3,8 @@ var prompt = require('prompt');
 var colors = require('colors');
 var emoji = require('node-emoji');
 
+
+// https://words.bighugelabs.com/admin/b94c927ccf7c57e746ede16bb0703ee5
 var wordsURL = "http://words.bighugelabs.com/api/2/b94c927ccf7c57e746ede16bb0703ee5/";
 
 
