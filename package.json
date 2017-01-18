@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/allendecodemtl/node-workshop-2/issues"
   },
-  "homepage": "https://github.com/allendecodemtl/node-workshop-2#readme"
+  "homepage": "https://github.com/allendecodemtl/node-workshop-2#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "node-emoji": "^1.5.1",
+    "prompt": "^1.0.0",
+    "request": "^2.79.0"
+  }
 }

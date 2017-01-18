@@ -30,3 +30,10 @@ function callbackFunction(error, objectOfUrl) {
 
 requestJson(url, callbackFunction);
 
+
+// ==========================
+// Answer
+// ==========================
+
+
+
