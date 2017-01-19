@@ -20,6 +20,8 @@
     "colors": "^1.1.2",
     "node-emoji": "^1.5.1",
     "prompt": "^1.0.0",
-    "request": "^2.79.0"
+    "prompt-promise": "^1.0.3",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
   }
 }

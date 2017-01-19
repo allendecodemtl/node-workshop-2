@@ -8,12 +8,6 @@ var darkSkyURL = "https://api.darksky.net/forecast/c28893f8002931042f753dae308e8
 var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 
 
-// 
-// Start the prompt 
-// 
-prompt.start();
-
-
 // Get longitute and latitute of city geolocation
 prompt.get(['location'], function(err, result) {
 
