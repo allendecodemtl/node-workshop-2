@@ -4,37 +4,23 @@ var promptPromise = require('prompt-promise');
 // https://words.bighugelabs.com/admin/b94c927ccf7c57e746ede16bb0703ee5
 var wordsURL = "http://words.bighugelabs.com/api/2/b94c927ccf7c57e746ede16bb0703ee5/";
 
-function runSynonyms() {
 
-    var pPromise = promptPromise('Word: ');
-    // Get longitute and latitute of city geolocation
+var pPromise = promptPromise('Word: ');
 
-    pPromise
-        .then(function(result) {
 
-            console.log('Command-line input received:');
-            console.log('Enter your word: ' + result);
+pPromise
+.then(function(result) {
+    console.log('Command-line input received:');
+    console.log('Enter word: ' + result);
 
-            wordsURL = wordsURL + result + "/json";
-            console.log(wordsURL);
-            var pRequest = requestPromise(wordsURL);
-            return pRequest;
-        })
-        .then(function(wordsResult) {
-            
-            var searchResults;
+    wordsURL = wordsURL + result + "/json";
 
-            try {
-                searchResults = JSON.parse(wordsResult);
-            }
-            catch (e) {
-                console.error(e);
-            }
+    var pRequest = requestPromise(wordsURL);
+    return pRequest;
+})
+.then(function(response) {
+ 
+    var searchResults = JSON.parse(response)
+    console.log(searchResults);
 
-            console.log(searchResults)
-            
-        });
-
-}
-
-runSynonyms();
+})
